@@ -46,7 +46,8 @@ class MobileFilter < Sinatra::Base
       node.attributes['href'].value = proxy_url.to_s+'url='+node_url.to_s
     end
 
-    a.children.last.children.first.add_previous_sibling(title_node)
+    # this can't be the right way to add nodes..
+    a.children.last.children.first.add_previous_sibling(title_node) if a.children.last.children.first
 
     body a.to_html
   end
