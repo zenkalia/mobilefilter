@@ -22,10 +22,21 @@ class MobileFilter < Sinatra::Base
 
     # kill stuff
     a.search('head').remove
-    a.search('style').remove
     a.search('img').remove
     a.search('iframe').remove
-    a.search('onclick').remove
+    a.search('script').remove
+
+    killthese = ['style', 'onclick', 'onmousedown', 'onmouseup', 'margin', 'display']
+    onthese = ['div', 'td', 'th', 'table', 'span', 'a']
+
+    onthese.each do |tag_name|
+      a.search(tag_name).each do |node|
+        killthese.each do |attr_name|
+          attribute = node.attributes[attr_name]
+          attribute.value = '' if attribute
+        end
+      end
+    end
 
     # rewrite anchor tags to go through proxy
     a.search('a').each do |node|
