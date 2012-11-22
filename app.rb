@@ -8,7 +8,7 @@ class MobileFilter < Sinatra::Base
     proxy_url.query = ''
 
     doc_url = params[:url]
-    doc_url = 'http://'+doc_url unless doc_url.index('http://') == 0
+    doc_url = 'http://'+doc_url unless doc_url.index('http') == 0
     doc = Nokogiri::HTML(open(doc_url))
 
     doc_url_obj = URI::parse doc_url
