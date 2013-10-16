@@ -61,7 +61,7 @@ class MobileFilter < Sinatra::Base
 
     # <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     meta_node = Nokogiri::XML::Node.new "meta", doc
-    meta_node['content'] = 'width=device-width, user-scalable=false'
+    meta_node['content'] = 'width=320, user-scalable=false, initial-scale=1.0'
     meta_node.parent = doc.search('head').first
 
     body doc.to_html
