@@ -43,6 +43,12 @@ class MobileFilter < Sinatra::Base
     doc.css('#header').remove
     doc.css('#footer').remove
 
+    if doc_url.index('news.google.com')
+      doc.css('.main-appbar').remove
+      doc.css('.kd-appbar').remove
+      doc.css('.esc-layout-thumbnail-cell').remove
+    end
+
     # rewrite anchor tags to go through proxy
     doc.search('a').each do |node|
       next unless node.attributes['href']
@@ -53,7 +59,7 @@ class MobileFilter < Sinatra::Base
 
     # <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     meta_node = Nokogiri::XML::Node.new "meta", doc
-    meta_node['content'] = 'width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'
+    meta_node['content'] = 'width=device-width, user-scalable=false'
     meta_node.parent = doc.search('head').first
 
     body doc.to_html
