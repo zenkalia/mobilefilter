@@ -49,6 +49,7 @@ class MobileFilter < Sinatra::Base
       doc.css('.kd-appbar').remove
       doc.css('.esc-layout-thumbnail-cell').remove
       doc.css('.media-strip-table').remove
+      doc.css('.rt-col').remove
     end
 
     # rewrite anchor tags to go through proxy
