@@ -27,6 +27,7 @@ class MobileFilter < Sinatra::Base
     doc.search('ul').remove
     doc.search('form').remove
     doc.search('style').remove
+    doc.search('object').remove
 
     killthese = ['style', 'onclick', 'onmousedown', 'onmouseup', 'margin', 'display']
     onthese = ['div', 'td', 'th', 'table', 'span', 'a']
